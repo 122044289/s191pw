@@ -1,34 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @vite(['resources/js/app.js'])
-    <link rel="stylesheet" href="{{ asset('css/fondo.css') }}">
-    <title>Registro Clientes</title>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Turista sin Maps</a>
+@extends('layouts.plantilla1') <!-- solo trae la platilla pero sin acomodar -->
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  @section('titulo', 'Formulario Clientes')
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Registro Clientes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/consultar">Consultar Clientes</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  @section('contenido') <!-- manda a llamar a plantilla1 -->
 
 <div class="container mt-5 col-md-6">
 
@@ -63,5 +38,6 @@
   </div>
 </div>
 </div>
-</body>
-</html>
+
+
+@endsection
