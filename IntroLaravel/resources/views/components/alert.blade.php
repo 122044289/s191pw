@@ -1,3 +1,7 @@
-<div>
-    <!-- Walk as if you are kissing the Earth with your feet. - Thich Nhat Hanh -->
+<div class="container mt-4">
+
+<div class="alert alert-{{ $tipo }}" role="alert">
+    Soy un alert {{ $slot }}
+</div> 
+
 </div>
