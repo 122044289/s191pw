@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     @vite(['resources/js/app.js'])
-    <title>  @yield('titulo') </title>
-
+    <title> @yield('titulo') </title>
 </head>
 <body>
-    
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="{{ route('rutainicio') }}">Turista sin Maps</a>
       
@@ -24,21 +21,17 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/form">Registro Clientes</a>
+                <a class="nav-link {{ request()->routeIs('rutacacas')?"text-warning":"" }}">Registro Clientes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('rutaconsulta') }}">Consultar Clientes</a>
+                <a class="nav-link {{ request()->routeIs('rutaconsulta')?"text-success":"" }}">Consultar Clientes</a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
 
-
-
-
-
-        @yield('contenido') <!-- renderizar -->
-
+      @yield('contenido')
+    
 </body>
 </html>

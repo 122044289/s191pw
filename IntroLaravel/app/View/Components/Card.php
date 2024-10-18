@@ -8,16 +8,16 @@ use Illuminate\View\Component;
 
 class Card extends Component
 {
-  
     public $encabezado;
     public $titulo;
     public $textoBoton;
 
-    public function __construct($encabezado,$titulo,$textoBoton)
+    public function __construct($encabezado, $titulo, $textoBoton)
     {
-        $this->encabezado= $encabezado;
-        $this->titulo= $titulo;
-        $this->textoBoton= $textoBoton;
+        $this->encabezado = $encabezado;
+        $this->titulo = $titulo;
+        $this->textoBoton = $textoBoton;
+        //Parametros que se pasan al componente
     }
 
     public function render(): View|Closure|string
