@@ -30,6 +30,17 @@ class controladorvistas extends Controller
         //return $peticion->ip(); //Funcion para mostrar la ip de la peticion
         //return $peticion->path(); //Funcion que muestra la ruta de la peticion.
         //return $peticion->url(); //Funcion que muestra la url de la peticion.   
-        return $peticion->all(); //Funcion que muestra todos los datos de la peticion.
+       // return back; //Funcion que muestra todos los datos de la peticion.
+    
+      // $id= [['usuario'=>'1'],['usuario'=>'2']];
+      // return view('formulario', compact('id'));
+
+      //redireccion enviando mesaje en session
+        $usuario= $peticion-> input('txtnombre');
+        session()->flash('exito','se guardo el usuario: '.$usuario);
+
+        return to_route('rutacacas');
+
     }
+
 }
