@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\validadorCliente;
 
 class controladorvistas extends Controller
 {
@@ -18,29 +19,12 @@ class controladorvistas extends Controller
         return view('clientes');
     }
 
-    public function procesarCliente(Request $peticion){
-        //Respuesta a la peticion POST
-        //return 'La info del cliente llego al controlador';
-        
+    public function procesarCliente(validadorCliente $peticion){
 
-        // $peticion->header('X-Header-Name');
-        //$value = $peticion->header('X-Header-Name');
-        //echo($value);
-
-        //return $peticion->ip(); //Funcion para mostrar la ip de la peticion
-        //return $peticion->path(); //Funcion que muestra la ruta de la peticion.
-        //return $peticion->url(); //Funcion que muestra la url de la peticion.   
-       // return back; //Funcion que muestra todos los datos de la peticion.
-    
-      // $id= [['usuario'=>'1'],['usuario'=>'2']];
-      // return view('formulario', compact('id'));
-
-      //redireccion enviando mesaje en session
-        $usuario= $peticion-> input('txtnombre');
-        session()->flash('exito','se guardo el usuario: '.$usuario);
+       
+        $usuario = $peticion->input('txtnombre'); //Redirección enviando msj en session
+        session()->flash('exito', 'Se guardo el usuario: '.$usuario);
 
         return to_route('rutacacas');
-
     }
-
 }
