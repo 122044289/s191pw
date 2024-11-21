@@ -6,9 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     @vite(['resources/js/app.js'])
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <title> @yield('titulo') </title>
 </head>
 <body>
@@ -24,10 +23,10 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('rutacacas')?"text-warning":"" }}">Registro Clientes</a>
+                <a class="nav-link active {{ request()->routeIs('rutacacas')?"text-warning":"" }}" aria-current="page" href="{{ route('rutacacas') }}">Registro Clientes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('rutaconsulta')?"text-success":"" }}">Consultar Clientes</a>
+                <a class="nav-link {{ request()->routeIs('rutaconsulta')?"text-warning":"" }}" href="{{ route('rutaconsulta') }}">Consultar Clientes</a>
               </li>
             </ul>
           </div>

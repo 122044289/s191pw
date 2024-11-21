@@ -57,7 +57,13 @@ class clienteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $cliente = DB::table('clientes')->where('id', $id)->first();
+
+        if (!$cliente) {
+            return redirect()->route('clientes.consulta')->with('error', 'Cliente no encontrado.');
+        }
+ 
+        return view('clientes.editar', compact('cliente')); 
     }
 
     /**
@@ -65,7 +71,22 @@ class clienteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $cliente = DB::table('clientes')->where('id', $id)->first();
+
+        if (!$cliente) {
+            return redirect()->route('clientes.consulta')->with('error', 'Cliente no encontrado.');
+        }
+
+        DB::table('clientes')->where('id', $id)->update([
+            'nombre' => $request->input('nombre'),
+            'apellido' => $request->input('apellido'),
+            'correo' => $request->input('correo'),
+            'telefono' => $request->input('telefono'),
+            'updated_at' => Carbon::now()
+        ]);
+
+        return redirect()->route('clientes.consulta')->with('exito', 'Cliente actualizado correctamente.'); 
+
     }
 
     /**
@@ -73,6 +94,15 @@ class clienteController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $cliente = DB::table('clientes')->where('id', $id)->first();
+
+        if (!$cliente) {
+            return redirect()->route('clientes.consulta')->with('error', 'Cliente no encontrado.');
+        }
+
+        DB::table('clientes')->where('id', $id)->delete();
+
+        return redirect()->route('clientes.consulta')->with('success', 'Cliente eliminado correctamente.');
     }
+
 }
