@@ -7,41 +7,41 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Http\Requests\validadorCliente;
 
+
+
 class clienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public function home(){
+        return view('inicio');
+    }
+
     public function index()
     {
-        //
+        $consultaClientes= DB::table('cliente')->get();
+        return view('clientes', compact('consultaClientes'));
     }
 
-    /**
-     * Sirve para abir el formulario.
-     */
     public function create()
     {
-        return view('formulario');
+        return view('formulario'); // Redirección a la vista formulario
     }
 
-    /**
-     * Aqui preparo el insert.
-     */
     public function store(validadorCliente $request)
     {
         DB::table('cliente')->insert([
-            "nombre"=>$request->input('txtnombre'),
-            "apellido"=>$request->input('txtapellido'),
-            "correo"=>$request->input('txtcorreo'),
-            "telefono"=>$request->input('txttelefono'),
-            "create_at"=>Carbon::now(),
-            "updated_at"=>Carbon::now(),
+            'nombre' => $request->input('txtnombre'),
+            'apellido' => $request->input('txtapellido'),
+            'correo' => $request->input('txtcorreo'),
+            'telefono' => $request->input('txttelefono'),
+            'created_at' => carbon::now(),
+            'updated_at' => carbon::now()
         ]);
 
         $usuario = $request->input('txtnombre'); //Redirección enviando msj en session
         session()->flash('exito', 'Se guardo el usuario: '.$usuario);
 
+        return to_route('rutacacas');
     }
 
     /**
