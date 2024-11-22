@@ -27,6 +27,7 @@ class clienteController extends Controller
         return view('formulario'); // Redirección a la vista formulario
     }
 
+    /*Aqui preparo el Insert*/
     public function store(validadorCliente $request)
     {
         DB::table('cliente')->insert([
@@ -44,65 +45,43 @@ class clienteController extends Controller
         return to_route('rutacacas');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
-        $cliente = DB::table('clientes')->where('id', $id)->first();
-
-        if (!$cliente) {
-            return redirect()->route('clientes.consulta')->with('error', 'Cliente no encontrado.');
-        }
- 
-        return view('clientes.editar', compact('cliente')); 
+        $cliente = DB::table('cliente')->where('id', $id)->first();
+        return view('actualizar', compact('cliente'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $cliente = DB::table('clientes')->where('id', $id)->first();
-
-        if (!$cliente) {
-            return redirect()->route('clientes.consulta')->with('error', 'Cliente no encontrado.');
-        }
-
-        DB::table('clientes')->where('id', $id)->update([
-            'nombre' => $request->input('nombre'),
-            'apellido' => $request->input('apellido'),
-            'correo' => $request->input('correo'),
-            'telefono' => $request->input('telefono'),
-            'updated_at' => Carbon::now()
+        $request->validate([
+            'txtnombre' => 'required|string|max:255',
+            'txtapellido' => 'required|string|max:255',
+            'txtcorreo' => 'required|email',
+            'txttelefono' => 'required|string|max:15',
         ]);
-
-        return redirect()->route('clientes.consulta')->with('exito', 'Cliente actualizado correctamente.'); 
-
+    
+        DB::table('cliente')->where('id', $id)->update([
+            'nombre' => $request->input('txtnombre'),
+            'apellido' => $request->input('txtapellido'),
+            'correo' => $request->input('txtcorreo'),
+            'telefono' => $request->input('txttelefono'),
+            'updated_at' => Carbon::now(),
+        ]);
+        
+        return redirect()->route('rutaconsulta')->with('exito', 'Cliente actualizado correctamente.');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    
+    
+    public function destroy($id)
     {
-        $cliente = DB::table('clientes')->where('id', $id)->first();
-
-        if (!$cliente) {
-            return redirect()->route('clientes.consulta')->with('error', 'Cliente no encontrado.');
-        }
-
-        DB::table('clientes')->where('id', $id)->delete();
-
-        return redirect()->route('clientes.consulta')->with('success', 'Cliente eliminado correctamente.');
+        DB::table('cliente')->where('id', $id)->delete();
+    
+        return redirect()->route('rutaconsulta')->with('exito', 'Cliente eliminado correctamente.');
     }
-
 }
